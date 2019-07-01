@@ -127,6 +127,10 @@ Express authentication template using Passport + flash messages + custom middlew
 
 
 ### Credit To:
+* alltrails.com for web content and layout inspiration
+* Hiking Project API
+* Dark Sky API
+* Mapbox API
 
 
 #### Additional Collaborators:
