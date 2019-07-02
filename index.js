@@ -9,11 +9,23 @@ const passport = require('./config/passportConfig'); // Import handwritten code 
 const flash = require('connect-flash');
 const isLoggedIn = require('./middleware/isLoggedIn');
 const helmet = require('helmet');
+const axios = require('axios'); 
+const methodOverride = require('method-override');
+const async = require('async');
+
 
 //* This is only used by the session store in this model 
 const db  = require('./models');
 
+// geocoding setup
+const mapbox = require("@mapbox/mapbox-sdk/services/geocoding");
+const geocodingClient = mapbox({
+    accessToken: process.env.MAPBOX_PUBLIC_KEY
+});
+
+
 const app = express();
+
 
 // This line makes the session use sequelize to write session data to a postgres table
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -72,7 +84,16 @@ app.get('/profile', isLoggedIn, function(req, res) {
 });
 
 app.use('/auth', require('./controllers/auth'));
+app.use('/trail', require('./controllers/trail'));
 // app.use('/auth', isLoggedIn, require('./controllers/auth')); Restricts all logins on all of these routes
+
+
+
+
+
+
+
+
 
 var server = app.listen(process.env.PORT || 3000);
 

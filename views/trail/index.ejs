@@ -1,0 +1,20 @@
+<div class="container">
+  <h1 class="text-center">Trails in the region</h1>
+
+  <% trails.trails.forEach( function(trail) {%>
+      <div class="well">
+        <h3><%= trail.name %></h3>
+        <h4><%= trail.length %> miles | Rating: <%= trail.stars %> | Elevation: <%= trail.ascent %> feet</h4> <br>
+        <h5><%= trail.summary %></h5> <br>
+        <h5>Weather Forecast (next 7 days):</h5>
+        <% results.forEach( function (temp) { %>
+          <p><%= temp.value.weather %></p>
+            
+          <% }) %>
+        <form method="POST" action="/trail">
+        <input hidden type="text" name="name" value="<%= trail.name %>">
+        <button class="btn btn-primary" type="submit">Add to Favorites</button>
+      </form>
+      </div>
+  <% }); %>
+</div>
