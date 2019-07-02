@@ -49,7 +49,7 @@ router.get("/", function(req, res) {
     // Use request to call the API
     axios.get(trailUrl).then( function(apiResponse) {
         let trails = apiResponse.data;
-        console.log(trails)
+        // console.log(trails)
         let weatherRequest = trails.trails.map( function (trail) {
             return function(callback) {
                 let weatherUrl = 'https://api.darksky.net/forecast/' + process.env.DARK_SKY_API + '/'+ trail.latitude + ',' + trail.longitude;

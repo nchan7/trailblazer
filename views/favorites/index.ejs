@@ -1,0 +1,16 @@
+<div class="container">
+  <h1 class="text-center">My Favorites</h1>
+
+
+  <h3>My favorite trails in the area:</h3>
+  <p> Click on each link for more details.</p>
+
+  <% trails.forEach(function(trail) { %>
+      <h5><a href="/trails/favorites/<%= trail.number %>"><%= trail.name.toUpperCase() %></a></h5>
+  <% }); %>
+
+  <a href="/">Home</a> 
+
+</div>
+
+

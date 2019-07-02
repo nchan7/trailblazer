@@ -11,8 +11,11 @@
           <p><%= temp.value.weather %></p>
             
           <% }) %>
-        <form method="POST" action="/trail">
+        <form method="POST" action="/trail/favorites">
         <input hidden type="text" name="name" value="<%= trail.name %>">
+        <input hidden type="text" name="lat" value="<%= trail.latitude %>">
+        <input hidden type="text" name="lon" value="<%= trail.longitude %>">
+        <input hidden type="text" name="number" value="<%= trail.id %>">
         <button class="btn btn-primary" type="submit">Add to Favorites</button>
       </form>
       </div>
