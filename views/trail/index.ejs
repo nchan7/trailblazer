@@ -6,11 +6,7 @@
         <h3><%= trail.name %></h3>
         <h4><%= trail.length %> miles | Rating: <%= trail.stars %> | Elevation: <%= trail.ascent %> feet</h4> <br>
         <h5><%= trail.summary %></h5> <br>
-        <h5>Weather Forecast (next 7 days):</h5>
-        <% results.forEach( function (temp) { %>
-          <p><%= temp.value.weather %></p>
-            
-          <% }) %>
+        
         <form method="POST" action="/trail/favorites">
         <input hidden type="text" name="name" value="<%= trail.name %>">
         <input hidden type="text" name="lat" value="<%= trail.latitude %>">

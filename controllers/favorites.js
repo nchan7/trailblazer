@@ -13,8 +13,8 @@ const geocodingClient = mapbox({
 
 // GET /trail - return a page with favorited Trails
 router.get('/', function(req, res) { // appends to the first parameter in the index.js file
-  db.trail.findAll().then(function(trail) {
-    res.render("favorites/index", {trail});
+  db.trail.findAll().then(function(trails) {
+    res.render("favorites/index", {trails});
   });
   // TODO: Get all records from the DB and render to view
   
@@ -26,7 +26,7 @@ router.post('/', function(req, res) { // appends to the first parameter in the i
     name: req.body.name,
     lat: req.body.lat,
     lon: req.body.lon,
-    num: req.body.number
+    number: req.body.number
   }).then(function(data) {
     res.redirect('/trail/favorites');
   });
@@ -37,34 +37,46 @@ router.post('/', function(req, res) { // appends to the first parameter in the i
 
 // Get /trail/:number - Gets one trail id from the database
 // and uses it to look up details about that one trail
-router.get('/:number', function(req, res) {
-  // TODO: Look up trail in our db by its trail ID which is in the number column (findOne)
+router.get("/:number", function(req, res) {
+  var trailUrl = 'https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API;
+  // Use request to call the API
+  axios.get(trailUrl).then( function(apiResponse) {
+      let trailDetails = apiResponse.data;
+      res.render('favorites/show', { trail: trailDetails });
+  })
+  
 
-    axios.get('https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API)
-    .then( function(apiResponse) {
-        var trailDetails = apiResponse.data;
-        let weatherRequest = trailDetails.trails.map( function (trail) {
-            return function(callback) {
-                let weatherUrl = 'https://api.darksky.net/forecast/' + process.env.DARK_SKY_API + '/'+ trail.latitude + ',' + trail.longitude;
-                axios.get(weatherUrl).then( function (results) {
-                    let name = trail.name;
-                    let weather = results.data.daily.data.map( function(temp) {
-                        return temp.temperatureMax;
-                    })
-                    callback(null, {trail: name, weather})
-                })
-            }
-        })
+});
+
+//TODO: Keep DARK SKY API HERE
+// router.get('/:number', function(req, res) {
+//   // TODO: Look up trail in our db by its trail ID which is in the number column (findOne)
+
+//     axios.get()
+//     .then( function(apiResponse) {
+//         var trailDetails = apiResponse.data;
+//         let weatherRequest = trailDetails.trails.map( function (trail) {
+//             return function(callback) {
+//                 let weatherUrl = 'https://api.darksky.net/forecast/' + process.env.DARK_SKY_API + '/'+ trail.latitude + ',' + trail.longitude;
+//                 axios.get(weatherUrl).then( function (results) {
+//                     let name = trail.name;
+//                     let weather = results.data.daily.data.map( function(temp) {
+//                         return temp.temperatureMax;
+//                     })
+//                     callback(null, {trail: name, weather})
+//                 })
+//             }
+//         })
     
-    async.parallel(async.reflectAll(weatherRequest), function(err, results) {
+//     async.parallel(async.reflectAll(weatherRequest), function(err, results) {
         
-        // res.json(results)
-        res.render('/trail/favorites/show', { trail: trailDetails, results });
-    })
-    })  
+//         // res.json(results)
+//         res.render('/trail/favorites/show', { trail: trailDetails, results });
+//     })
+//     })  
       
     
-});
+// });
 // });
   
  

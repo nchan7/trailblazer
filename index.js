@@ -67,7 +67,7 @@ app.use(passport.session());
 
 app.use(function(req, res, next) {
   res.locals.alerts = req.flash(); 
-  res.locals.currentUser = req.user; 
+  res.locals.currentUser = req.user;
   next(); 
   /* 
   If there were additional middleware then next would tell the code to continue to the next piece of middleware...

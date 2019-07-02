@@ -1,9 +1,0 @@
-<h1>Details</h1>
-<h3><%= trailDetails.trails.name.toUpperCase() %></h3>
-<div><img src="<%= trailDetails.trails.imgMedium%>"></div>
-<p>Max Elevation: <%= trailDetails.trails.high%> feet</p>
-<p>Min Elevation: <%= trailDetails.trails.low%> feet</p>
-<a href="/trail/favorites">Back to favorites</a><br>
-<form method="POST" action="/trail/favorites<%=trail.number%>/?_method=DELETE"><br>
-    <input type="submit" value="Delete" />
-</form>
