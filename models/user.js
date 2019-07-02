@@ -45,7 +45,8 @@ module.exports = (sequelize, DataTypes) => {
   user.associate = function(models) {
     // associations can be defined here
     // * We will need to have a model related to user
-    models.user.hasMany(models.trail);
+    models.user.belongsToMany(models.trail, {through: "usersTrails"});
+    models.user.hasMany(models.comment);
   };
 
   user.prototype.validPassword = function(passwordTyped) { // assign new key to my user prototype...refer to every user that you can create and store into database
