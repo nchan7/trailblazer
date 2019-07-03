@@ -33,6 +33,7 @@ router.get('/', function(req, res) { // appends to the first parameter in the in
   
 // });
 
+//! THIS NEEDS TO BE A FIND OR CREATE
 // POST /trail - receive the name of a trail and add it to the database
 router.post('/', function(req, res) { // appends to the first parameter in the index.js file
   db.user.findByPk(parseInt(req.user.id)).then( function (user) {

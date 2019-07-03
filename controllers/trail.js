@@ -11,17 +11,43 @@ const geocodingClient = mapbox({
     accessToken: process.env.MAPBOX_PUBLIC_KEY
 });
 
+// router.get("/", function(req, res) {
+//     let location = req.query.location; 
+//     // Seattle, WA
+//     // use geocoder to query the location with sushi appended to the query
+//     // then take response from mapbox and render "show" with the data
+//     geocodingClient.forwardGeocode({
+//     query: location
+//     }).send().then( function(response) {
+//         console.log(response.body.features[0].center);
+//         // let results = response.body.features.map( function(feature) {
+//         //     console.log(feature.center);
+//         //     return feature.center
+//         // });
+//         // res.render("map", {results}); 
+//     })
+//   });
+
 //* Pulling API data - Hiking Project API
 router.get("/", function(req, res) {
-    var lat = 47.6853
-    var lon = -122.2994
-    var trailUrl = 'https://www.hikingproject.com/data/get-trails?lat=' + lat + '&lon=' + lon + '&maxDistance=50&maxResults=20&key=' + process.env.HIKING_PROJECT_API;
-    // Use request to call the API
-    axios.get(trailUrl).then( function(apiResponse) {
-        let trails = apiResponse.data;
-        res.render('trail/index', { trails });
-    })
+    let location = req.query.location; 
+    // Seattle, WA
+    // use geocoder to query the location with sushi appended to the query
+    // then take response from mapbox and render "show" with the data
+    geocodingClient.forwardGeocode({
+    query: location
+    }).send().then( function(response) {   
+        var lat = response.body.features[0].center[1];
+        var lon = response.body.features[0].center[0];
+        var trailUrl = 'https://www.hikingproject.com/data/get-trails?lat=' + lat + '&lon=' + lon + '&maxDistance=50&maxResults=20&key=' + process.env.HIKING_PROJECT_API;
+        // Use request to call the API
+        axios.get(trailUrl).then( function(apiResponse) {
+            let trails = apiResponse.data;
+            res.render('trail/index', { trails });
+        })
     
+
+    });
 
 });
 
