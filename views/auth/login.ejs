@@ -1,3 +1,12 @@
+<% if (!currentUser) { %>
+    <a href="/">Home</a>
+<% } else { %>
+    <p>Hello, <%= currentUser.name %></p>
+    <a href="/">Home</a> |
+    <a href="/auth/profile">Profile</a> |
+    <a href="/auth/logout">Logout</a>
+<% } %>
+
 <form action="/auth/login" method="POST">
   <div class="form-group">
     <label for="authEmail">Email</label>

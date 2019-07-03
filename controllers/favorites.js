@@ -23,17 +23,34 @@ router.get('/', function(req, res) { // appends to the first parameter in the in
 
 // POST /trail - receive the name of a trail and add it to the database
 router.post('/', function(req, res) { // appends to the first parameter in the index.js file
-  db.trail.create({
-    name: req.body.name,
-    lat: req.body.lat,
-    lon: req.body.lon,
-    number: req.body.number
-  }).then(function(data) {
-    res.redirect('/trail/favorites');
-  });
+  db.user.findByPk(parseInt(req.user.id)).then( function (user) {
+    user.createTrail({
+      name: req.body.name,
+      lat: req.body.lat,
+      lon: req.body.lon,
+      number: req.body.number
+    }).then(function(data) {
+      res.redirect('/trail/favorites');
+    });
+  })
+
+  // db.trail.create({
+  //   name: req.body.name,
+  //   lat: req.body.lat,
+  //   lon: req.body.lon,
+  //   number: req.body.number
+  // }).then(function(data) {
+  //   res.redirect('/trail/favorites');
+  // });
   // TODO: Get form data and add a new record to DB
   
 });
+
+
+
+
+
+
 
 
 // GET /trail/:number - Gets one trail id from the database
