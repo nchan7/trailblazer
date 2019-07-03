@@ -25,7 +25,6 @@
 
     <h4>Review:</h4>
     <form action="/trail/favorites/<%= trail.number %>/comments" method="POST">
-        <input hidden type="text" name="name" value="<%trail.users.name%>">
         <textarea type="text" name="comment" placeholder="Add a review"></textarea> <br />
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
@@ -34,6 +33,7 @@
 
 
     <% trail.comments.forEach(function(comment) { %>
-        <p>"<%= comment.comment%>" - <%=trail.users.name%></p>
+        <p>"<%= comment.comment%>" - <%=comment.name%></p>
+        <p><%= moment(comment.createdAt).calendar() %></p>
     <% }); %>
 </div>

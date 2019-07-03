@@ -12,6 +12,8 @@ const helmet = require('helmet');
 const axios = require('axios'); 
 const methodOverride = require('method-override');
 const async = require('async');
+const moment = require("moment"); 
+
 
 
 //* This is only used by the session store in this model 
@@ -44,6 +46,11 @@ app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
 app.use(methodOverride('_method'));
+
+app.use(function(req, res, next) {
+  res.locals.moment = moment;
+  next();
+});
 
 
 // Configures express-session middleware

@@ -48,6 +48,9 @@ Images of the API sites
 ### Dark Sky API
 
 
+One challenge that I ran into with the Dark Sky API was the fact that it would only allow for 1,000 API calls per day. I reached that limit because I was initially calling the API on each search which would return 20 trails each with their own weather call. 
+
+
 ### Mapbox API 
 
 

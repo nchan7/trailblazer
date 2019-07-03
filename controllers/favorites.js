@@ -14,12 +14,24 @@ const geocodingClient = mapbox({
 
 // GET /trail - return a page with favorited Trails
 router.get('/', function(req, res) { // appends to the first parameter in the index.js file
-  db.trail.findAll().then(function(trails) {
-    res.render("favorites/index", {trails});
+  db.user.findOne({
+    where: {id: parseInt(req.user.id)},
+    include: [db.trail]
+  }).then(function(user) {
+    res.render("favorites/index", {user});
   });
   // TODO: Get all records from the DB and render to view
   
 });
+
+
+// router.get('/', function(req, res) { // appends to the first parameter in the index.js file
+//   db.trail.findAll().then(function(trails) {
+//     res.render("favorites/index", {trails});
+//   });
+//   // TODO: Get all records from the DB and render to view
+  
+// });
 
 // POST /trail - receive the name of a trail and add it to the database
 router.post('/', function(req, res) { // appends to the first parameter in the index.js file
@@ -120,6 +132,7 @@ router.post("/:number/comments", function(req, res) { // wouldn't just post to :
     }).then(function(trail) {
         trail.createComment({
             userId: req.user.id,
+            name: req.user.name,
             comment: req.body.comment
         }).then(function(comment) {
             res.redirect("/trail/favorites/" + req.params.number) 
