@@ -5,6 +5,7 @@ const axios = require('axios');
 const async = require('async');
 const router = express.Router();
 
+
 //Geocoding Setup
 const mapbox = require("@mapbox/mapbox-sdk/services/geocoding");
 const geocodingClient = mapbox({
@@ -53,11 +54,11 @@ router.post('/', function(req, res) { // appends to the first parameter in the i
 router.get('/:number', function(req, res) {
   // TODO: Look up trail in our db by its trail ID which is in the number column (findOne)
     var trailUrl = 'https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API;
-    axios.get().then( function(apiResponse) {
+    axios.get(trailUrl).then( function(apiResponse) {
         let trailDetails = apiResponse.data;
         let weatherRequest = trailDetails.trails.map( function (trail) {
             return function(callback) {
-                let weatherUrl = 'https://api.darksky.net/forecast/' + process.env.DARK_SKY_API + '/'+ trail.latitude + ',' + trail.longitude;
+                let weatherUrl = 'https://api.darksky.net/forecast/' + process.env.DARK_SKY_API + '/' + trail.latitude + ',' + trail.longitude;
                 axios.get(weatherUrl).then( function (results) {
                     let name = trail.name;
                     let weather = results.data.daily.data.map( function(temp) {
@@ -71,7 +72,7 @@ router.get('/:number', function(req, res) {
     async.parallel(async.reflectAll(weatherRequest), function(err, results) {
         
         // res.json(results)
-        res.render('/trail/favorites/show', { trailDetails, results });
+        res.render('favorites/show', { trailDetails, results });
     })
     })  
       

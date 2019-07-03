@@ -43,6 +43,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
+app.use(methodOverride('_method'));
+
 
 // Configures express-session middleware
 app.use(session({

@@ -1,17 +1,17 @@
 <div class="well">
     <h1>Details</h1>
     <h3><%= trailDetails.trails[0].name %></h3>
-    <h4><%= trailDetails.trails[0].length %> miles | Rating: <%= trailDetails.trails[0].stars %> 
+    <h4><%= trailDetails.trails[0].length %> miles | Rating: <%= trailDetails.trails[0].stars %>/5
     | Elevation: <%= trailDetails.trails[0].ascent %> feet</h4> <br>
     <h5>Weather Forecast (next 7 days):</h5>
         <% results.forEach( function (temp) { %>
         <p><%= temp.value.weather %></p>
         <% }) %>
     <div><img src="<%= trailDetails.trails[0].imgMedium%>"></div>
-    <p>Max Elevation: <%= trailDetails.trails[0].high%> feet</p>
-    <p>Min Elevation: <%= trailDetails.trails[0].low%> feet</p>
+    <p>Max Altitude: <%= trailDetails.trails[0].high%> feet</p>
+    <p>Min Altitude: <%= trailDetails.trails[0].low%> feet</p>
     <a href="/trail/favorites">Back to favorites</a><br>
-    <form method="POST" action="/trail/favorites<%=trailDetails.number%>/?_method=DELETE"><br>
+    <form method="POST" action="/trail/favorites/<%=trailDetails.trails[0].id%>/?_method=DELETE"><br>
         <button class="btn btn-primary" type="submit">Remove from Favorites</button>
         
     </form>
