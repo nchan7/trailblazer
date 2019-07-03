@@ -1,22 +1,22 @@
-<h2>Home</h2>
 
-<% if (!currentUser) { %>
-    <a href="/auth/signup">Signup</a>
-    <a href="/auth/login">Login</a>
-<% } else { %>
-    <p>Hello, <%= currentUser.name %></p>
-    <a href="/profile">Profile</a> |
-    <a href="/trail/favorites">Favorites</a> |
-    <a href="/auth/logout">Logout</a>
-<% } %>
+    <% if (!currentUser) { %>
+        <a href="/auth/signup">Signup</a>
+        <a href="/auth/login">Login</a>
+    <% } else { %>
+        <p>Hello, <%= currentUser.name %></p>
+        <a href="/profile">Profile</a> |
+        <a href="/trail/favorites">Favorites</a> |
+        <a href="/auth/logout">Logout</a>
+    <% } %>
+<div id="home">
 
-<h3>Find your next adventure</h3>
+    <h2>Find Your Next Adventure</h2>
 
-<form action="/trail" method="GET">
-    <input type="text" name="city" placeholder="City">
-    <input type="text" name="state" placeholder="State">
-    <input type="submit" value="Search"> 
-</form>
+    <form action="/trail" method="GET">
+        <input type="text" name="location" placeholder="i.e. 123 Main St | Seattle, WA | Deception Pass" size="40">
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+</div>
 
 
 

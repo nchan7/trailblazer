@@ -141,5 +141,17 @@ router.post("/:number/comments", function(req, res) { // wouldn't just post to :
 });
 
 
+//! NEED AN UPDATE CRUD ROUTE TO UPDATE COMMENTS BASED ON THE TRAIL AND LOGGEDIN USER
+// router.put("/:number/comments", function(req, res) {
+//   db.comment.update({
+//       comment: req.body.comment
+//   }, {
+//       where: {: parseInt(req.params.id)}
+//   }).then(function(dino) {
+//           res.redirect("/dinosaurs/" + parseInt(req.params.id));
+//   });
+// })
+
+
 
 module.exports = router;
