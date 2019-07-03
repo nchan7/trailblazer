@@ -1,6 +1,12 @@
 <div class="well">
     <h1>Details</h1>
     <h3><%= trailDetails.trails[0].name %></h3>
+    <h4><%= trailDetails.trails[0].length %> miles | Rating: <%= trailDetails.trails[0].stars %> 
+    | Elevation: <%= trailDetails.trails[0].ascent %> feet</h4> <br>
+    <h5>Weather Forecast (next 7 days):</h5>
+        <% results.forEach( function (temp) { %>
+        <p><%= temp.value.weather %></p>
+        <% }) %>
     <div><img src="<%= trailDetails.trails[0].imgMedium%>"></div>
     <p>Max Elevation: <%= trailDetails.trails[0].high%> feet</p>
     <p>Min Elevation: <%= trailDetails.trails[0].low%> feet</p>

@@ -4,7 +4,6 @@
   <% trails.trails.forEach( function(trail) {%>
       <div class="well">
         <h3><%= trail.name %></h3>
-        <h4><%= trail.length %> miles | Rating: <%= trail.stars %> | Elevation: <%= trail.ascent %> feet</h4> <br>
         <h5><%= trail.summary %></h5> <br>
         
         <form method="POST" action="/trail/favorites">

@@ -35,59 +35,53 @@ router.post('/', function(req, res) { // appends to the first parameter in the i
 });
 
 
-// Get /trail/:number - Gets one trail id from the database
+// GET /trail/:number - Gets one trail id from the database
 // and uses it to look up details about that one trail
-router.get("/:number", function(req, res) {
-  var trailUrl = 'https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API;
-  // Use request to call the API
-  axios.get(trailUrl).then( function(apiResponse) {
-      let trailDetails = apiResponse.data;
-      res.render('favorites/show', { trailDetails });
-  })
+// router.get("/:number", function(req, res) {
+//   var trailUrl = 'https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API;
+//   // Use request to call the API
+//   axios.get(trailUrl).then( function(apiResponse) {
+//       let trailDetails = apiResponse.data;
+//       res.render('favorites/show', { trailDetails });
+//   })
   
 
-});
+// });
 
+// GET /trail/:number - Gets one trail id from the database and returns show page
 //TODO: Keep DARK SKY API HERE
-// router.get('/:number', function(req, res) {
-//   // TODO: Look up trail in our db by its trail ID which is in the number column (findOne)
-
-//     axios.get()
-//     .then( function(apiResponse) {
-//         var trailDetails = apiResponse.data;
-//         let weatherRequest = trailDetails.trails.map( function (trail) {
-//             return function(callback) {
-//                 let weatherUrl = 'https://api.darksky.net/forecast/' + process.env.DARK_SKY_API + '/'+ trail.latitude + ',' + trail.longitude;
-//                 axios.get(weatherUrl).then( function (results) {
-//                     let name = trail.name;
-//                     let weather = results.data.daily.data.map( function(temp) {
-//                         return temp.temperatureMax;
-//                     })
-//                     callback(null, {trail: name, weather})
-//                 })
-//             }
-//         })
+router.get('/:number', function(req, res) {
+  // TODO: Look up trail in our db by its trail ID which is in the number column (findOne)
+    var trailUrl = 'https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API;
+    axios.get().then( function(apiResponse) {
+        let trailDetails = apiResponse.data;
+        let weatherRequest = trailDetails.trails.map( function (trail) {
+            return function(callback) {
+                let weatherUrl = 'https://api.darksky.net/forecast/' + process.env.DARK_SKY_API + '/'+ trail.latitude + ',' + trail.longitude;
+                axios.get(weatherUrl).then( function (results) {
+                    let name = trail.name;
+                    let weather = results.data.daily.data.map( function(temp) {
+                        return temp.temperatureMax;
+                    })
+                    callback(null, {trail: name, weather})
+                })
+            }
+        })
     
-//     async.parallel(async.reflectAll(weatherRequest), function(err, results) {
+    async.parallel(async.reflectAll(weatherRequest), function(err, results) {
         
-//         // res.json(results)
-//         res.render('/trail/favorites/show', { trail: trailDetails, results });
-//     })
-//     })  
+        // res.json(results)
+        res.render('/trail/favorites/show', { trailDetails, results });
+    })
+    })  
       
     
-// });
-// });
-  
- 
-  // Use the pokemon name from the db to query the api (axios) for details on that one pokemon 
-  // Take data from the api and render a details/show page for this one pokemon
-  // res.send('This is the route for showing one pokemon');
-// });
+});
 
-router.delete('/:name', function(req, res) {
+
+router.delete('/:number', function(req, res) {
   db.trail.destroy ({
-    where: {name: req.params.name}
+    where: {number: req.params.number}
     }).then(function(trail) {
     res.redirect('/trail/favorites'); 
   });
