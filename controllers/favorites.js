@@ -42,7 +42,7 @@ router.get("/:number", function(req, res) {
   // Use request to call the API
   axios.get(trailUrl).then( function(apiResponse) {
       let trailDetails = apiResponse.data;
-      res.render('favorites/show', { trail: trailDetails });
+      res.render('favorites/show', { trailDetails });
   })
   
 

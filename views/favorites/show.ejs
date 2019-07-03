@@ -1,9 +1,12 @@
-<h1>Details</h1>
-<h3><%= trail.trails.name %></h3>
-<div><img src="<%= trail.trails.imgMedium%>"></div>
-<p>Max Elevation: <%= trail.trails.high%> feet</p>
-<p>Min Elevation: <%= trail.trails.low%> feet</p>
-<a href="/trail/favorites">Back to favorites</a><br>
-<form method="POST" action="/trail/favorites<%=trail.number%>/?_method=DELETE"><br>
-    <input type="submit" value="Delete" />
-</form>
+<div class="well">
+    <h1>Details</h1>
+    <h3><%= trailDetails.trails[0].name %></h3>
+    <div><img src="<%= trailDetails.trails[0].imgMedium%>"></div>
+    <p>Max Elevation: <%= trailDetails.trails[0].high%> feet</p>
+    <p>Min Elevation: <%= trailDetails.trails[0].low%> feet</p>
+    <a href="/trail/favorites">Back to favorites</a><br>
+    <form method="POST" action="/trail/favorites<%=trailDetails.number%>/?_method=DELETE"><br>
+        <button class="btn btn-primary" type="submit">Remove from Favorites</button>
+        
+    </form>
+</div>
