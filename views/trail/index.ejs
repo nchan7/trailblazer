@@ -15,7 +15,7 @@
 
   <% trails.trails.forEach( function(trail) {%>
       <div class="well">
-        <h3><%= trail.name %></h3>
+        <a href="/trail/favorites/<%= trail.id %>"><h3><%= trail.name %></h3></a>
         <h5><%= trail.summary %></h5> <br>
         
         <form method="POST" action="/trail/favorites">
