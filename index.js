@@ -94,7 +94,7 @@ app.get('/profile', isLoggedIn, function(req, res) {
 
 app.use('/auth', require('./controllers/auth'));
 app.use('/trail', require('./controllers/trail'));
-app.use('/trail/favorites', isLoggedIn, require('./controllers/favorites'));
+app.use('/favorites', isLoggedIn, require('./controllers/favorites'));
 // app.use('/auth', isLoggedIn, require('./controllers/auth')); Restricts all logins on all of these routes
 
 

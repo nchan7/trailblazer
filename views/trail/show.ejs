@@ -1,4 +1,5 @@
 <% if (!currentUser) { %>
+    <a href="/">Home</a> |
     <a href="/auth/signup">Signup</a> |
     <a href="/auth/login">Login</a>
 <% } else { %>
@@ -11,29 +12,14 @@
 
 <div class="well">
     <h3><%= trailDetails.trails[0].name %></h3>
-    <a href="/favorites" class="btn btn-primary">Back to Favorites</a>
     <h4>Trail Length: <%= trailDetails.trails[0].length %> miles | Rating: <%= trailDetails.trails[0].stars %>/5
     | Elevation: <%= trailDetails.trails[0].ascent %> feet</h4> 
     <h4>Difficulty: <%=trailDetails.trails[0].difficulty%></h4>
     <h5><%= trailDetails.trails[0].summary%></h5>
     <div><img src="<%= trailDetails.trails[0].imgMedium%>"></div>
-    <form method="POST" action="/favorites/<%=trailDetails.trails[0].id%>/?_method=DELETE"><br>
-        <button class="btn btn-primary" type="submit">Remove from Favorites</button>
-    </form>
 
     <hr/>
 
-    <h4>Review:</h4>
-    <form action="/favorites/<%= trail.number %>/comments" method="POST">
-        <textarea type="text" name="comment" placeholder="Add a review"></textarea> <br />
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
+    <h4>Reviews: You must sign in to post and view comments</h4>
 
-    <hr />
-
-
-    <% trail.comments.forEach(function(comment) { %>
-        <p>"<%= comment.comment%>" - <%=comment.name%></p>
-        <p><%= moment(comment.createdAt).calendar() %></p>
-    <% }); %>
 </div>

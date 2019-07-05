@@ -1,12 +1,12 @@
 
 <% if (!currentUser) { %>
-    <a href="/auth/signup">Signup</a>
+    <a href="/auth/signup">Signup</a> |
     <a href="/auth/login">Login</a>
 <% } else { %>
     <p>Hello, <%= currentUser.name %></p>
     <a href="/">Home</a> |
     <a href="/profile">Profile</a> |
-    <a href="/trail/favorites">Favorites</a> |
+    <a href="/favorites">Favorites</a> |
     <a href="/auth/logout">Logout</a>
 <% } %>
 
@@ -15,16 +15,21 @@
 
   <% trails.trails.forEach( function(trail) {%>
       <div class="well">
-        <a href="/trail/favorites/<%= trail.id %>"><h3><%= trail.name %></h3></a>
+        <a href="/trail/<%= trail.id %>"><h3><%= trail.name %></h3></a>
         <h5><%= trail.summary %></h5> <br>
-        
-        <form method="POST" action="/trail/favorites">
-        <input hidden type="text" name="name" value="<%= trail.name %>">
-        <input hidden type="text" name="lat" value="<%= trail.latitude %>">
-        <input hidden type="text" name="lon" value="<%= trail.longitude %>">
-        <input hidden type="text" name="number" value="<%= trail.id %>">
-        <button class="btn btn-primary" type="submit">Add to Favorites</button>
-      </form>
+        <% if(!currentUser) { %>
+          <h6>Signup or login to save to favorites</h6>
+        <% } else { %>
+          <form method="POST" action="/favorites">
+            <input hidden type="text" name="name" value="<%= trail.name %>">
+            <input hidden type="text" name="lat" value="<%= trail.latitude %>">
+            <input hidden type="text" name="lon" value="<%= trail.longitude %>">
+            <input hidden type="text" name="number" value="<%= trail.id %>">
+            <button class="btn btn-primary" type="submit">Add to Favorites</button>
+          </form>
+        <% } %>
+
+         
       </div>
   <% }); %>
 </div>

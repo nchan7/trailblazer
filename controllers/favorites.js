@@ -19,7 +19,9 @@ router.get('/', function(req, res) { // appends to the first parameter in the in
     include: [db.trail]
   }).then(function(user) {
     res.render("favorites/index", {user});
-  });
+  }).catch(function(error) {
+    console.log(error);
+  }) 
   // TODO: Get all records from the DB and render to view
   
 });
@@ -37,14 +39,16 @@ router.get('/', function(req, res) { // appends to the first parameter in the in
 // POST /trail - receive the name of a trail and add it to the database
 router.post('/', function(req, res) { // appends to the first parameter in the index.js file
   db.user.findByPk(parseInt(req.user.id)).then( function (user) {
-    user.createTrail({
-      name: req.body.name,
-      lat: req.body.lat,
-      lon: req.body.lon,
-      number: req.body.number
-    }).then(function(data) {
-      res.redirect('/trail/favorites');
-    });
+    db.trail.findOrCreate({
+      where: {name: req.body.name,
+              lat: req.body.lat,
+              lon: req.body.lon,
+              number: req.body.number}
+    }).spread(function (trail, created){
+      user.addTrail(trail).then(function(trail) {
+        res.redirect('/favorites');
+      })
+    })
   })
 
   // db.trail.create({
@@ -77,7 +81,13 @@ router.get("/:number", function(req, res) {
         where: {number: parseInt(req.params.number)},
         include: [db.comment, db.user]
       }).then(function(trail) {
-        res.render('favorites/show', { trail, trailDetails });
+        if(req.user) {
+          res.render('favorites/show', { trail, trailDetails });
+        } else {
+          res.render('trail/show', { trail, trailDetails });
+        }
+      }).catch(function(error) {
+        console.log(error);
       })
 
     })
@@ -120,7 +130,7 @@ router.delete('/:number', function(req, res) {
   db.trail.destroy ({
     where: {number: req.params.number}
     }).then(function(trail) {
-    res.redirect('/trail/favorites'); 
+    res.redirect('/favorites'); 
   });
 });
 
@@ -136,7 +146,7 @@ router.post("/:number/comments", function(req, res) { // wouldn't just post to :
             name: req.user.name,
             comment: req.body.comment
         }).then(function(comment) {
-            res.redirect("/trail/favorites/" + req.params.number) 
+            res.redirect("/favorites/" + req.params.number) 
         });
     });
 });
