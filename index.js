@@ -46,6 +46,8 @@ app.use(express.static(__dirname + "/public"));
 app.use(ejsLayouts);
 app.use(helmet());
 app.use(methodOverride('_method'));
+app.set("layout extractScripts", true);
+
 
 app.use(function(req, res, next) {
   res.locals.moment = moment;

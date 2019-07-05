@@ -12,6 +12,14 @@
 
 <div class="container">
   <h1 class="text-center">Trails in the region</h1>
+  <div id="map">
+  </div>
+
+  <script>
+    const markerCoords = <%- JSON.stringify(trailsMap) %>
+  </script>
+  <script src="/js/app.js"></script>
+</div>
 
   <% trails.trails.forEach( function(trail) {%>
       <div class="well">
@@ -32,4 +40,3 @@
          
       </div>
   <% }); %>
-</div>

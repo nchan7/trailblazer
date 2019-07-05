@@ -43,7 +43,14 @@ router.get("/", function(req, res) {
         // Use request to call the API
         axios.get(trailUrl).then( function(apiResponse) {
             let trails = apiResponse.data;
-            res.render('trail/index', { trails });
+            let trailsMap = apiResponse.data.trails.map(function(trail){
+                return trail.longitude + ", " + trail.latitude;
+            });
+            // res.json(trails);
+            // res.json(trailsMap);
+
+
+            res.render('trail/index', { trails, trailsMap });
         })
     
 
