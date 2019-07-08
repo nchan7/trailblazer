@@ -135,15 +135,6 @@ router.get("/:number", function(req, res) {
     
 // });
 
-router.get("/:number/comments/edit", function(req, res) {
-  // TODO Update Route
-  let number = parseInt(req.params.id); 
-  db.dino.findByPk(id)
-      .then(function(dino) {
-          res.render("dinos/edit", {dino});
-      });
-});
-
 
 router.delete('/:number', function(req, res) {
   db.trail.destroy ({
@@ -170,28 +161,29 @@ router.post("/:number/comments", function(req, res) { // wouldn't just post to :
     });
 });
 
-// PUT /:number/comments
+  // PUT /:number/comments
 router.put("/:number/comments", function(req, res) {
   db.trail.findOne({
-    where: {number: parseInt(req.params.number)}
+    where: {number: parseInt(req.params.number)},
+    include: [db.user, db.comment]
   }).then(function(trail) {
-    trail.updateComment({
-      userId: req.user.id,
-      name: req.user.name,
+    trail.comments.updateAttribute({
       comment: req.body.comment
     }).then(function(comment) {
       res.redirect("/favorites/" + req.params.number);
     })
   })
-  
-  // db.comment.update({
-  //     comment: req.body.comment
-  // }, {
-  //     where: {number: parseInt(req.params.number)}
-  // }).then(function(comment) {
-  //         res.redirect("/favorites/" + req.params.number);
-  // });
-})
+    
+    // db.comment.update({
+    //     comment: req.body.comment
+    // }, {
+    //     where: {number: parseInt(req.params.number)}
+    // }).then(function(comment) {
+    //         res.redirect("/favorites/" + req.params.number);
+    // });
+});
+
+
 
 
 
