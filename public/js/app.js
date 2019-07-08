@@ -7,7 +7,7 @@ var map = new mapboxgl.Map({
     container: "map",
     style: "mapbox://styles/mapbox/streets-v11",
     center: markerCoords[0],
-    zoom: 9
+    zoom: 8
 })
 
 const geoJson = {
@@ -16,7 +16,7 @@ const geoJson = {
         let marker = {
             "type": "Feature",
             "properties": {
-                "iconSize": [60, 60]
+                "iconSize": [30, 30]
             }, 
             "geometry": {
                 "type": "Point",

@@ -12,7 +12,7 @@ const geocodingClient = mapbox({
     accessToken: process.env.MAPBOX_PUBLIC_KEY
 });
 
-// GET /trail - return a page with favorited Trails
+// GET / - return a page with favorited Trails
 router.get('/', function(req, res) { // appends to the first parameter in the index.js file
   db.user.findOne({
     where: {id: parseInt(req.user.id)},
@@ -36,7 +36,7 @@ router.get('/', function(req, res) { // appends to the first parameter in the in
 // });
 
 //! THIS NEEDS TO BE A FIND OR CREATE
-// POST /trail - receive the name of a trail and add it to the database
+// POST / - receive the name of a trail and add it to the database
 router.post('/', function(req, res) { // appends to the first parameter in the index.js file
   db.user.findByPk(parseInt(req.user.id)).then( function (user) {
     db.trail.findOrCreate({
@@ -70,17 +70,27 @@ router.post('/', function(req, res) { // appends to the first parameter in the i
 
 
 
-// GET /trail/:number - Gets one trail id from the database
+// GET /:number - Gets one trail id from the database
 // and uses it to look up details about that one trail
 router.get("/:number", function(req, res) {
   var trailUrl = 'https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API;
   // Use request to call the API
   axios.get(trailUrl).then( function(apiResponse) {
       let trailDetails = apiResponse.data;
+      let trailRating = apiResponse.data.trails[0].stars;
+      let trailAscent = apiResponse.data.trails[0].ascent;
+      let trailLength = apiResponse.data.trails[0].length;
       db.trail.findOne({
         where: {number: parseInt(req.params.number)},
         include: [db.comment, db.user]
       }).then(function(trail) {
+        // Get hike recommendations from the api
+        // Make a find all api call within this geo area
+        // Filter the array of results to remove trails that are...
+        //   a.) too long or short
+        //   b.) too much or too little ascent
+        //   c.) too low a rating
+        // Render that stuff into the page
         if(req.user) {
           res.render('favorites/show', { trail, trailDetails });
         } else {
@@ -125,6 +135,15 @@ router.get("/:number", function(req, res) {
     
 // });
 
+router.get("/:number/comments/edit", function(req, res) {
+  // TODO Update Route
+  let number = parseInt(req.params.id); 
+  db.dino.findByPk(id)
+      .then(function(dino) {
+          res.render("dinos/edit", {dino});
+      });
+});
+
 
 router.delete('/:number', function(req, res) {
   db.trail.destroy ({
@@ -134,7 +153,7 @@ router.delete('/:number', function(req, res) {
   });
 });
 
-// PUT /pokemon/:id
+// POST /:number/comments
 // router.put("/:id")
 router.post("/:number/comments", function(req, res) { // wouldn't just post to :id because it wouldn't be a restful route
     db.trail.findOne({
@@ -151,17 +170,28 @@ router.post("/:number/comments", function(req, res) { // wouldn't just post to :
     });
 });
 
-
-//! NEED AN UPDATE CRUD ROUTE TO UPDATE COMMENTS BASED ON THE TRAIL AND LOGGEDIN USER
-// router.put("/:number/comments", function(req, res) {
-//   db.comment.update({
-//       comment: req.body.comment
-//   }, {
-//       where: {: parseInt(req.params.id)}
-//   }).then(function(dino) {
-//           res.redirect("/dinosaurs/" + parseInt(req.params.id));
-//   });
-// })
+// PUT /:number/comments
+router.put("/:number/comments", function(req, res) {
+  db.trail.findOne({
+    where: {number: parseInt(req.params.number)}
+  }).then(function(trail) {
+    trail.updateComment({
+      userId: req.user.id,
+      name: req.user.name,
+      comment: req.body.comment
+    }).then(function(comment) {
+      res.redirect("/favorites/" + req.params.number);
+    })
+  })
+  
+  // db.comment.update({
+  //     comment: req.body.comment
+  // }, {
+  //     where: {number: parseInt(req.params.number)}
+  // }).then(function(comment) {
+  //         res.redirect("/favorites/" + req.params.number);
+  // });
+})
 
 
 

@@ -31,9 +31,22 @@
 
     <hr />
 
+    <% if (trails.comments) { %>
+        <% trail.comments.forEach(function(comment) { %>
+            <p>"<%= comment.comment%>" - <%=comment.name%></p>
+            if (comment.userId === currentUser.id) {
+                <form method="POST" action="/favorites/<%= trail.number %>/comments/?_method=PUT">
+                    <input type="submit" value="Edit Review">
+                </form>
+            }
+            <p><%= moment(comment.createdAt).calendar() %></p>
+        <% }); %>
 
-    <% trail.comments.forEach(function(comment) { %>
-        <p>"<%= comment.comment%>" - <%=comment.name%></p>
-        <p><%= moment(comment.createdAt).calendar() %></p>
-    <% }); %>
+    <% } %>
+
+
+</div>
+
+<div class="well" id="rating">
+
 </div>

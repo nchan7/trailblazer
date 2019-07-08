@@ -44,7 +44,7 @@ router.get("/", function(req, res) {
         axios.get(trailUrl).then( function(apiResponse) {
             let trails = apiResponse.data;
             let trailsMap = apiResponse.data.trails.map(function(trail){
-                return parseFloat(trail.longitude) + ", " + parseFloat(trail.latitude);
+                return [parseFloat(trail.longitude), parseFloat(trail.latitude)];
             });
             // res.json(trails);
             // res.json(trailsMap);

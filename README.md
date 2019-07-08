@@ -135,13 +135,14 @@ Express authentication template using Passport + flash messages + custom middlew
 * Hiking Project API
 * Dark Sky API
 * Mapbox API
-* Abe Yang for
+* Abe Yang for his initial investigation into the Dark Sky API
 
 
 #### Additional Collaborators:
 Thanks to Steve Peters, Carlo Bruno, Mike Shull, and many others in the SEI-SEA-25 cohort for their ideas and thoughts that were incorporated in this project
 
 ### Additional Functionality and Wish List
+* Incorporating multi-page view so that it would show only 10 results per page with a link to scroll to the next set of 10. 
 * Adding in actual reviews by pulling from the Yelp API
 * Incorporating camping sites and fishing spots
 * Linking a trip to suggest good food places nearby
