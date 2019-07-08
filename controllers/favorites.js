@@ -77,25 +77,48 @@ router.get("/:number", function(req, res) {
   // Use request to call the API
   axios.get(trailUrl).then( function(apiResponse) {
       let trailDetails = apiResponse.data;
+      let similarLengthDetails = null;
+      let similarAscentDetails = null;
+      // res.json(trailDetails);
       let trailRating = apiResponse.data.trails[0].stars;
       let trailAscent = apiResponse.data.trails[0].ascent;
       let trailLength = apiResponse.data.trails[0].length;
+      let trailLat = apiResponse.data.trails[0].latitude;
+      let trailLng = apiResponse.data.trails[0].longitude;
       db.trail.findOne({
         where: {number: parseInt(req.params.number)},
         include: [db.comment, db.user]
       }).then(function(trail) {
-        // Get hike recommendations from the api
-        // Make a find all api call within this geo area
-        // Filter the array of results to remove trails that are...
-        //   a.) too long or short
-        //   b.) too much or too little ascent
-        //   c.) too low a rating
-        // Render that stuff into the page
-        if(req.user) {
-          res.render('favorites/show', { trail, trailDetails });
-        } else {
-          res.render('trail/show', { trail, trailDetails });
-        }
+        var searchUrl = 'https://www.hikingproject.com/data/get-trails?lat='+trailLat+'&lon='+trailLng+'&maxDistance=10&maxResults=20&key='+ process.env.HIKING_PROJECT_API;
+        axios.get(searchUrl).then( function(apiResponse) {
+          let lengthDifference = [];
+          let ascentDifference = [];
+          apiResponse.data.trails.forEach(function(trail) {
+            lengthDifference.push(Math.abs(trailLength - trail.length));
+            ascentDifference.push(Math.abs(trailAscent - trail.ascent));
+          })
+          let indexLength = lengthDifference.indexOf(Math.min(...lengthDifference)); // Stack overflow
+          let indexAscent = ascentDifference.indexOf(Math.min(...ascentDifference)); // Stack overflow
+          similarLengthDetails = apiResponse.data.trails[indexLength];
+          similarAscentDetails = apiResponse.data.trails[indexAscent];
+          
+          
+          
+          
+          
+          // Get hike recommendations from the api
+          // Make a find all api call within this geo area
+          // Filter the array of results to remove trails that are...
+          //   a.) too long or short
+          //   b.) too much or too little ascent
+          //   c.) too low a rating
+          // Render that stuff into the page
+          if(req.user) {
+            res.render('favorites/show', { trail, trailDetails, similarLengthDetails, similarAscentDetails });
+          } else {
+            res.render('trail/show', { trail, trailDetails });
+          }
+        })
       }).catch(function(error) {
         console.log(error);
       })
@@ -172,8 +195,6 @@ router.put("/:number/comments/:id", function(req, res) {
           res.redirect("/favorites/" + parseInt(req.params.number));
   });
 })
-
-
 
 
 
