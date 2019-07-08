@@ -162,26 +162,17 @@ router.post("/:number/comments", function(req, res) { // wouldn't just post to :
 });
 
   // PUT /:number/comments
-router.put("/:number/comments", function(req, res) {
-  db.trail.findOne({
-    where: {number: parseInt(req.params.number)},
-    include: [db.user, db.comment]
-  }).then(function(trail) {
-    trail.comments.updateAttribute({
+router.put("/:number/comments/:id", function(req, res) {
+  db.comment.update({
       comment: req.body.comment
-    }).then(function(comment) {
-      res.redirect("/favorites/" + req.params.number);
-    })
-  })
-    
-    // db.comment.update({
-    //     comment: req.body.comment
-    // }, {
-    //     where: {number: parseInt(req.params.number)}
-    // }).then(function(comment) {
-    //         res.redirect("/favorites/" + req.params.number);
-    // });
-});
+  }, {
+      where: {id: parseInt(req.params.id)},
+      include: [db.trail, db.user]
+  }).then(function(comment) {
+          res.redirect("/favorites/" + parseInt(req.params.number));
+  });
+})
+
 
 
 

@@ -10,9 +10,11 @@ body {
 }
 
 .container {
-    color: #555555;
     
+    font-family: "Helvetica Neue";
+    color: #555555; 
 }
+
 
 #home {
     color: #1A2601;
@@ -31,6 +33,4 @@ body {
     height: 80vh; 
 }
 
-h1 {
-}
 

@@ -1,10 +1,10 @@
 <h2>Update your review</h2>
 
-<form method="POST" action="/favorites/<%= comment.trails.number %>/?_method=PUT">
-    <label for="comment"> Review </label>
+<form method="POST" action="/favorites/<%= comment.trail.number %>/comments/<%= comment.id%>?_method=PUT">
+    <label for="comment"></label>
     <input type="text" name="comment" value="<%= comment.comment%>" />
 
         <input type="submit" value="Update my review">
     </form>
 <br>
-<a href="/favorites/<%= comment.trails.number%>">Back to trail</a>
+<a href="/favorites/<%= comment.trail.number%>">Back to trail</a>

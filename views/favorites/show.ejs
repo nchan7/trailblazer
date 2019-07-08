@@ -35,9 +35,7 @@
         <% trail.comments.forEach(function(comment) { %>
             <p>"<%= comment.comment%>" - <%=comment.name%></p>
             <% if (comment.userId === currentUser.id) { %>
-                <form method="POST" action="/favorites/<%= trail.number %>/comments/?_method=PUT">
-                    <input type="submit" value="Edit Review">
-                </form>
+                <a href="/comments/<%= comment.id %>/edit">Edit Review</a>
             <% } %>
             <p><%= moment(comment.createdAt).calendar() %></p>
         <% }); %>
