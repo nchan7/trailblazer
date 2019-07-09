@@ -1,13 +1,15 @@
 <div class="container-show">
-    <h3><%= trailDetails.trails[0].name %></h3>
-    <h4>Trail Length: <%= trailDetails.trails[0].length %> miles | Rating: <%= trailDetails.trails[0].stars %>/5
-    | Elevation Gain: <%= trailDetails.trails[0].ascent %> feet</h4> 
-    <h4>Difficulty: <%=trailDetails.trails[0].difficulty%></h4>
-    <h5><%= trailDetails.trails[0].summary%></h5>
+    <h3><%= trailDetails.trails[0].name %></h3> <br>
+    <h5><%= trailDetails.trails[0].summary%></h5> <br>
+    <h5>Trail Details:</h5>
+    <p>Trail Length: <%= trailDetails.trails[0].length %> miles</p>
+    <p>Rating: <%= trailDetails.trails[0].stars %>/5</p>
+    <p>Elevation Gain: <%= trailDetails.trails[0].ascent %> feet</p>
+    <p>Difficulty: <%=trailDetails.trails[0].difficulty%></p> <br/>
     <div><img src="<%= trailDetails.trails[0].imgMedium%>"></div>
 
-    <hr/>
+    <br>
 
-    <h4>Reviews: You must sign in to post and view comments</h4>
+    <h5>Reviews: You must sign in to post and view comments</h5>
 
 </div>
