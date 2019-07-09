@@ -23,15 +23,18 @@
 
     <hr/>
 
-    <h4>Review:</h4>
-    <form action="/favorites/<%= trail.number %>/comments" method="POST">
-        <textarea type="text" name="comment" placeholder="Add a review"></textarea> <br />
-        <button class="btn btn-primary" type="submit">Submit</button>
-    </form>
+    <% if (trail) { %>
+        <h4>Review:</h4>
+        <form action="/favorites/<%= trail.number %>/comments" method="POST">
+            <textarea type="text" name="comment" placeholder="Add a review"></textarea> <br />
+            <button class="btn btn-primary" type="submit">Submit</button>
+        </form>
+    
+        <hr />
 
-    <hr />
+    <% } %>
 
-    <% if (trail.comments) { %>
+    <% if (trail) { %>
         <% trail.comments.forEach(function(comment) { %>
             <p>"<%= comment.comment%>" - <%=comment.name%></p>
             <% if (comment.userId === currentUser.id) { %>
@@ -45,11 +48,15 @@
 
 </div>
 
-<h2>Similar Hikes</h2>
-<div class="well" id="similar">
-    <h3>Similar Length: <%= similarLengthDetails.name %></h3>
-</div>
+<% if (similarLengthDetails) { %>
+    <h2>Similar Hikes</h2>
+    <div class="well" id="similar">
+        <h3>Similar Length: <%= similarLengthDetails.name %></h3>
+    </div>
+<% } %>
 
-<div class="well" id="similar">
-    <h3>Similar Elevation Gain: <%= similarAscentDetails.name %></h3>
-</div>
+<% if (similarAscentDetails) { %>
+    <div class="well" id="similar">
+        <h3>Similar Elevation Gain: <%= similarAscentDetails.name %></h3>
+    </div>
+<% } %>

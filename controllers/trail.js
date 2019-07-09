@@ -50,7 +50,7 @@ router.get("/", function(req, res) {
             // res.json(trailsMap);
 
 
-            res.render('trail/index', { trails, trailsMap });
+            res.render('trail/index', { trails, trailsMap});
         })
     
 
@@ -60,21 +60,46 @@ router.get("/", function(req, res) {
 
 router.get("/:number", function(req, res) {
     var trailUrl = 'https://www.hikingproject.com/data/get-trails-by-id?ids=' + req.params.number + '&key=' + process.env.HIKING_PROJECT_API;
+    let similarLengthDetails = null;
+    let similarAscentDetails = null;
+    // res.json(trailDetails);
+    
     // Use request to call the API
     axios.get(trailUrl).then( function(apiResponse) {
       let trailDetails = apiResponse.data;
+      let trailRating = apiResponse.data.trails[0].stars;
+      let trailAscent = apiResponse.data.trails[0].ascent;
+      let trailLength = apiResponse.data.trails[0].length;
+      let trailLat = apiResponse.data.trails[0].latitude;
+      let trailLng = apiResponse.data.trails[0].longitude;
       db.trail.findOne({
         where: {number: parseInt(req.params.number)},
       }).then(function(trail) {
+        var searchUrl = 'https://www.hikingproject.com/data/get-trails?lat='+trailLat+'&lon='+trailLng+'&maxDistance=10&maxResults=20&key='+ process.env.HIKING_PROJECT_API;
+        axios.get(searchUrl).then( function(apiResponse) {
+          let lengthDifference = [];
+          let ascentDifference = [];
+          apiResponse.data.trails.forEach(function(trail) {
+            lengthDifference.push(Math.abs(trailLength - trail.length));
+            ascentDifference.push(Math.abs(trailAscent - trail.ascent));
+          })
+          let indexLength = lengthDifference.indexOf(Math.min.apply(null, lengthDifference.filter(Boolean))); // Stack overflow
+          let indexAscent = ascentDifference.indexOf(Math.min.apply(null, ascentDifference.filter(Boolean))); // Stack overflow
+          // Source Code: https://stackoverflow.com/questions/10557176/minimum-number-excluding-zero
+          similarLengthDetails = apiResponse.data.trails[indexLength];
+          similarAscentDetails = apiResponse.data.trails[indexAscent];
            if(req.user) {
-             res.render('favorites/show', { trail, trailDetails });
-         } else {
+             res.render('favorites/show', { trail, trailDetails, similarLengthDetails, similarAscentDetails });
+            } else {
             res.render('trail/show', { trail, trailDetails });
-         }
-      }).catch(function(error) {
+            }
+         }).catch(function(error) {
           console.log(error);
-      })
+    
+        })
+        })
 
+    
     })
 });
 
