@@ -1,14 +1,4 @@
 
-<% if (!currentUser) { %>
-    <a href="/auth/signup">Signup</a> |
-    <a href="/auth/login">Login</a>
-<% } else { %>
-    <p>Hello, <%= currentUser.name %></p>
-    <a href="/">Home</a> |
-    <a href="/profile">Profile</a> |
-    <a href="/favorites">Favorites</a> |
-    <a href="/auth/logout">Logout</a>
-<% } %>
 
 <div class="container">
   <h1 class="text-center">Trails in the region</h1>
@@ -24,7 +14,7 @@
 <br>
 
 <% trails.trails.forEach( function(trail) {%>
-    <div class="well">
+    <div class="container-fluid">
       <a href="/trail/<%= trail.id %>"><h3><%= trail.name %></h3></a>
       <h5><%= trail.summary %></h5> <br>
       <% if(!currentUser) { %>

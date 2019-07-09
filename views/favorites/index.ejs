@@ -1,14 +1,12 @@
 <div class="container">
-  <a href="/">Home</a> 
   
   <h1 class="text-center">My Favorites</h1>
 
 
-  <h3>My favorite trails in the area:</h3>
   <p> Click on each link for more details.</p>
 
   <% user.trails.forEach(function(trail) { %>
-      <h4><li><a href="/favorites/<%= trail.number %>"><%= trail.name %></a></li></h4>
+      <h4><a href="/favorites/<%= trail.number %>"><%= trail.name %></a></h4>
   <% }); %>
 
  

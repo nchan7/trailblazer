@@ -1,11 +1,4 @@
-<% if (!currentUser) { %>
-    <a href="/">Home</a>
-<% } else { %>
-    <p>Welcome back, <%= currentUser.name %></p>
-    <a href="/">Home</a> |
-    <a href="/auth/profile">Profile</a> |
-    <a href="/auth/logout">Logout</a>
-<% } %>
+<h3> Login Below </h3>
 
 <form action="/auth/login" method="POST">
   <div class="form-group">

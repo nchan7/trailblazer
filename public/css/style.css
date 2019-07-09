@@ -13,14 +13,46 @@ canvas {
     position: relative !important;
 }
 
+h3 {
+    text-align: center;
+}
+
+h4 {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+
+
 .navbar-brand {
     color: #FFFFFF;
 }
 
 .container {
-    
+    margin: 100px auto 10px auto;
     font-family: "Helvetica Neue";
-    color: #555555; 
+    color: #333333; 
+}
+
+.container-fluid {
+    text-align: center;
+    margin: 20px auto; 
+    background-color: rgba(167, 200, 242, .75);
+    border-radius: 20px; 
+    padding: 10px; 
+    color: #FFFFFF;
+}
+
+.container-show {
+    text-align: center;
+    margin: 20px auto; 
+    background-color: rgba(167, 200, 242, .75);
+    border-radius: 20px; 
+    padding: 10px; 
+    color: #333333;
 }
 
 

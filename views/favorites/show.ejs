@@ -1,16 +1,18 @@
-<div class="well">
-    <h3><%= trailDetails.trails[0].name %></h3>
-    <a href="/favorites" class="btn btn-primary">Back to Favorites</a>
-    <h4>Trail Length: <%= trailDetails.trails[0].length %> miles | Rating: <%= trailDetails.trails[0].stars %>/5
-    | Elevation Gain: <%= trailDetails.trails[0].ascent %> feet</h4> 
-    <h4>Difficulty: <%=trailDetails.trails[0].difficulty%></h4>
-    <h5><%= trailDetails.trails[0].summary%></h5>
+<div class="container-show">
+    <h3><%= trailDetails.trails[0].name %></h3> <br>
+    <h5><%= trailDetails.trails[0].summary%></h5> <br>
+    <h5>Trail Details</h5>
+    <p>Trail Length: <%= trailDetails.trails[0].length %> miles</p>
+    <p>Rating: <%= trailDetails.trails[0].stars %>/5</p>
+    <p>Elevation Gain: <%= trailDetails.trails[0].ascent %> feet</p>
+    <p>Difficulty: <%=trailDetails.trails[0].difficulty%></p> <br/>
     <div><img src="<%= trailDetails.trails[0].imgMedium%>"></div>
+    <a href="/favorites" class="btn m-2 float-left btn-light">Back to Favorites</a>
     <form method="POST" action="/favorites/<%=trailDetails.trails[0].id%>/?_method=DELETE"><br>
-        <button class="btn btn-primary" type="submit">Remove from Favorites</button>
+        <button class="btn float-right btn-light" type="submit">Remove from Favorites</button>
     </form>
 
-    <hr/>
+    
 
     <% if (trail) { %>
         <h4>Review:</h4>
@@ -19,7 +21,7 @@
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     
-        <hr />
+        
 
     <% } %>
 
@@ -27,7 +29,7 @@
         <% trail.comments.forEach(function(comment) { %>
             <p>"<%= comment.comment%>" - <%=comment.name%></p>
             <% if (comment.userId === currentUser.id) { %>
-                <a href="/comments/<%= comment.id %>/edit">Edit Review</a>
+                <a href="/comments/<%= comment.id %>/edit" class="btn m-2 btn-light">Edit Review</a>
             <% } %>
             <p><%= moment(comment.createdAt).calendar() %></p>
         <% }); %>
