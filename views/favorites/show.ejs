@@ -7,10 +7,10 @@
     <p>Elevation Gain: <%= trailDetails.trails[0].ascent %> feet</p>
     <p>Difficulty: <%=trailDetails.trails[0].difficulty%></p> <br/>
     <div><img src="<%= trailDetails.trails[0].imgMedium%>"></div>
-    <a href="/favorites" class="btn m-2 float-left btn-light">Back to Favorites</a>
     <form method="POST" action="/favorites/<%=trailDetails.trails[0].id%>/?_method=DELETE"><br>
-        <button class="btn float-right btn-light" type="submit">Remove from Favorites</button>
-    </form>
+        <button class="btn btn-light" type="submit">Remove from Favorites</button>
+    </form> <br>
+    <a href="/favorites" class="btn m-2 btn-light">Back to Favorites</a>
 
     
 
@@ -20,7 +20,7 @@
             <textarea type="text" name="comment" placeholder="Add a review"></textarea> <br />
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
-    
+    <br>
         
 
     <% } %>
@@ -40,14 +40,16 @@
 </div>
 
 <% if (similarLengthDetails) { %>
-    <h2>Similar Hikes</h2>
-    <div class="well" id="similar">
+    <div class="container-show">
+        <h2>Similar Hikes</h2>
+    
         <h3>Similar Length: <%= similarLengthDetails.name %></h3>
-    </div>
+    
 <% } %>
 
 <% if (similarAscentDetails) { %>
-    <div class="well" id="similar">
+    
         <h3>Similar Elevation Gain: <%= similarAscentDetails.name %></h3>
+    
     </div>
 <% } %>
