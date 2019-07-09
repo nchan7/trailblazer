@@ -1,7 +1,7 @@
 <div class="container-show">
     <h3><%= trailDetails.trails[0].name %></h3> <br>
     <h5><%= trailDetails.trails[0].summary%></h5> <br>
-    <h5>Trail Details</h5>
+    <h5>Trail Details:</h5>
     <p>Trail Length: <%= trailDetails.trails[0].length %> miles</p>
     <p>Rating: <%= trailDetails.trails[0].stars %>/5</p>
     <p>Elevation Gain: <%= trailDetails.trails[0].ascent %> feet</p>
@@ -41,15 +41,15 @@
 
 <% if (similarLengthDetails) { %>
     <div class="container-show">
-        <h2>Similar Hikes</h2>
+        <h3>Similar Hikes</h3>
     
-        <h3>Similar Length: <%= similarLengthDetails.name %></h3>
+        <h4>Similar Length: <%= similarLengthDetails.name %></h4>
     
 <% } %>
 
 <% if (similarAscentDetails) { %>
     
-        <h3>Similar Elevation Gain: <%= similarAscentDetails.name %></h3>
+        <h4>Similar Elevation Gain: <%= similarAscentDetails.name %></h4>
     
     </div>
 <% } %>
