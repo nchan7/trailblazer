@@ -13,6 +13,10 @@ canvas {
     position: relative !important;
 }
 
+.navbar-brand {
+    color: #FFFFFF;
+}
+
 .container {
     
     font-family: "Helvetica Neue";
@@ -27,6 +31,12 @@ canvas {
     align-items: center;
     justify-content: center;
     vertical-align: middle;
+    position: fixed; 
+    top: 150px;
+    bottom: 260px;
+    left: 260px; 
+    right: 300px; 
+    margin: 0 auto;
 }
 
 

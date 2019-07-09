@@ -1,15 +1,3 @@
-<% if (!currentUser) { %>
-    <a href="/">Home</a> |
-    <a href="/auth/signup">Signup</a> |
-    <a href="/auth/login">Login</a>
-<% } else { %>
-    <p>Hello, <%= currentUser.name %></p>
-    <a href="/">Home</a> |
-    <a href="/profile">Profile</a> |
-    <a href="/favorites">Favorites</a> |
-    <a href="/auth/logout">Logout</a>
-<% } %>
-
 <div class="well">
     <h3><%= trailDetails.trails[0].name %></h3>
     <h4>Trail Length: <%= trailDetails.trails[0].length %> miles | Rating: <%= trailDetails.trails[0].stars %>/5
