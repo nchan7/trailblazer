@@ -85,7 +85,7 @@ Initial wireframes were drawn to understand the general flow of a user through t
 ### Route Files
 The requirements of this project included implementing all four CRUD (Create, Read, Update, Delete) routes. The way this CRUD routes were constructed were initiall determined by the wireframing and user experience:
 
-<img src="./planning/Routes.jpg" height = 200px width = 400px>
+<img src="./planning/Routes.jpg" height = 300px width = 400px>
 
 ### Site Experience
 The following are wireframe diagrams that best capture the initial thoughts for this web app. 
@@ -108,8 +108,6 @@ Description and Images of the site:
 #### Similar Results:
 
 <img src="./planning/Search Page Redirect.png" height = 200px width = 400px>
-
- 
 
 # Execution
 The app itself provided a variety of different challenges ranging from setting up the models to route permissions to mutliple API calls to checking for similar trails and hikes. 
@@ -141,7 +139,8 @@ Another feature that this project employed was the async module and functionalit
 ## Checking for Similar Trails
 The initial algorithm to check for similar trails looks at two criteria of a trail:
 1. Length
-2. Elevation Gain 
+2. Elevation Gain
+ 
 On the page showing details for a single hike, there are two additional recommended hikes which are the closest to the selected hike in terms of the two criteria. 
 
 This feature has additional potential to be developed into a more robust search and filter algorithm. 
