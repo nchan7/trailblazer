@@ -11,22 +11,6 @@ const geocodingClient = mapbox({
     accessToken: process.env.MAPBOX_PUBLIC_KEY
 });
 
-// router.get("/", function(req, res) {
-//     let location = req.query.location; 
-//     // Seattle, WA
-//     // use geocoder to query the location with sushi appended to the query
-//     // then take response from mapbox and render "show" with the data
-//     geocodingClient.forwardGeocode({
-//     query: location
-//     }).send().then( function(response) {
-//         console.log(response.body.features[0].center);
-//         // let results = response.body.features.map( function(feature) {
-//         //     console.log(feature.center);
-//         //     return feature.center
-//         // });
-//         // res.render("map", {results}); 
-//     })
-//   });
 
 //* Pulling API data - Hiking Project API
 router.get("/", function(req, res) {
@@ -46,8 +30,7 @@ router.get("/", function(req, res) {
             let trailsMap = apiResponse.data.trails.map(function(trail){
                 return [parseFloat(trail.longitude), parseFloat(trail.latitude)];
             });
-            // res.json(trails);
-            // res.json(trailsMap);
+            
 
 
             res.render('trail/index', { trails, trailsMap});

@@ -12,7 +12,6 @@ router.get("/:id/edit", function(req, res) {
       where: {id: parseInt(req.params.id)},
       include: [db.trail, db.user]
     }).then(function(comment) {
-      // res.json(comment);
       res.render("comments/edit", {comment});
     });
   

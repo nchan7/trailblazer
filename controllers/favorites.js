@@ -27,15 +27,6 @@ router.get('/', function(req, res) { // appends to the first parameter in the in
 });
 
 
-// router.get('/', function(req, res) { // appends to the first parameter in the index.js file
-//   db.trail.findAll().then(function(trails) {
-//     res.render("favorites/index", {trails});
-//   });
-//   // TODO: Get all records from the DB and render to view
-  
-// });
-
-//! THIS NEEDS TO BE A FIND OR CREATE
 // POST / - receive the name of a trail and add it to the database
 router.post('/', function(req, res) { // appends to the first parameter in the index.js file
   db.user.findByPk(parseInt(req.user.id)).then( function (user) {
@@ -51,15 +42,6 @@ router.post('/', function(req, res) { // appends to the first parameter in the i
     })
   })
 
-  // db.trail.create({
-  //   name: req.body.name,
-  //   lat: req.body.lat,
-  //   lon: req.body.lon,
-  //   number: req.body.number
-  // }).then(function(data) {
-  //   res.redirect('/trail/favorites');
-  // });
-  // TODO: Get form data and add a new record to DB
   
 });
 
@@ -102,10 +84,6 @@ router.get("/:number", function(req, res) {
           // Source Code: https://stackoverflow.com/questions/10557176/minimum-number-excluding-zero
           similarLengthDetails = apiResponse.data.trails[indexLength];
           similarAscentDetails = apiResponse.data.trails[indexAscent];
-          
-          
-          
-          
           
           // Get hike recommendations from the api
           // Make a find all api call within this geo area
