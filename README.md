@@ -5,15 +5,16 @@
 
 ## Introduction
 Looking for your next adventure? Here's where it begins! 
-This site supports your search for your next hike providing searched results based on similar features to hikes you like as well as reviews of those hikes. 
+Use this site to search for your next hike! Search for your next hike, save them to your favorites, post reviews, and find similar hikes. 
+Although there are similar sites available to the public, the existing sites provide an overwhelming amount of information at times which is difficult to understand and sort through. 
 
 Screenshot of the app:
-
+<img src="./public/img/Trailblazer.png" height = 200px width = 400px>
 
 
 
 ## Project Requirements
-This is the second project that will be incorporated as part of the portfolio of the General Assembly Software Engineering Immersive. The goal is to combined all that we have learned in Units 1 and 2 (HTML, CSS, Javasript, Node.js, Express.js, Postgres, Sequelize, and Authentication) into a web application that we can publish. 
+This is the second project that will be incorporated as part of the portfolio of the General Assembly Software Engineering Immersive. The goal is to combined all that we have learned in Units 1 and 2 (HTML, CSS, Javasript, Node.js, Express.js, Postgres, Sequelize, and Authentication) into a web application that we can publish for the public. 
 
 ### Technical Requirements
 The technical requirements for the project are as follows: 
@@ -36,48 +37,61 @@ Run npm install to install all of the dependencies
 ## Pulling from APIs
 
 This project combines three APIs with an option to incorporate additional ones: 
-1. Hiking Project API - 
-2. Dark Sky API - 
-3. Mapbox API - 
+1. Hiking Project API - https://www.hikingproject.com/data
+2. Dark Sky API - https://darksky.net/dev/docs#overview
+3. Mapbox API - https://docs.mapbox.com/api/search/
 
 Images of the API sites
 
 ### Hiking Project API
+<img src="./public/img/HikingProject.png" height = 200px width = 400px>
 
 
 ### Dark Sky API
+<img src="./public/img/DarkSky.png" height = 200px width = 400px>
 
-
-One challenge that I ran into with the Dark Sky API was the fact that it would only allow for 1,000 API calls per day. I reached that limit because I was initially calling the API on each search which would return 20 trails each with their own weather call. 
+One challenge that I ran into with the Dark Sky API was the fact that it would only allow 1,000 API calls per day. I reached that limit because I was initially calling the API on each search which would return 20 trails each with their own Dark Sky API call. After this, I refactored the code to only show weather for the trail of choice 
 
 
 ### Mapbox API 
+<img src="./public/img/Mapbox.png" height = 200px width = 400px>
 
+A challenge with Mapbox was the map itself was not being displayed properly as the map seemed to only show up on half of the space created for it. After doing some digging, I found that some of the CSS styling needed updating. 
 
+## Planning
+About 4-8 hours of the project was devoted to initial planning, database diagrams, and wireframing. 
 
-
-
-## Database Design
+### Database Design
 After finding the appropriate data, the data connections were established to develop an app that meets the technical requirements of this project. 
 
-Image of the database structure
+Database Structure
+<img src="./planning/ERDiagram_Project2_v2.png" height = 200px width = 400px>
 
 
-## Wireframing and User Exprience
+### Wireframing and User Exprience
+Initial wireframes were drawn to understand the general flow of a user through the web app. The wireframing also helped to establish the initial routes and pages that would be referenced
 
-
-### Route Files
+#### Route Files
+The requirements of this project included implementing all four CRUD (Create, Read, Update, Delete) routes. The way this CRUD routes were constructed were initiall determined by the wireframing and user experience. 
+<img src="./planning/Routes.jpg" height = 200px width = 400px>
 
 #### Site Experience
-Description and Images of the site
+The following are wireframe diagrams that best capture the initial thoughts for this web app. 
 
-Home 
+Description and Images of the site:
 
-Profile / Signup 
+##### Home 
+<img src="./planning/Home Page.png" height = 200px width = 400px>
 
-Favorites 
 
-Similar Results
+##### Profile / Signup 
+<img src="./planning/Login Page.png" height = 200px width = 400px>
+
+##### Favorites 
+<img src="./planning/Show Page.png" height = 200px width = 400px>
+
+##### Similar Results
+<img src="./planning/Search Page Redirect.png" height = 200px width = 400px>
 
  
 
