@@ -9,6 +9,10 @@ body {
 
 }
 
+canvas {
+    position: relative !important;
+}
+
 .container {
     
     font-family: "Helvetica Neue";
@@ -36,5 +40,7 @@ body {
 #similar {
     display: inline-block;
 }
+
+
 
 

@@ -97,8 +97,9 @@ router.get("/:number", function(req, res) {
             lengthDifference.push(Math.abs(trailLength - trail.length));
             ascentDifference.push(Math.abs(trailAscent - trail.ascent));
           })
-          let indexLength = lengthDifference.indexOf(Math.min(...lengthDifference)); // Stack overflow
-          let indexAscent = ascentDifference.indexOf(Math.min(...ascentDifference)); // Stack overflow
+          let indexLength = lengthDifference.indexOf(Math.min.apply(null, lengthDifference.filter(Boolean))); // Stack overflow
+          let indexAscent = ascentDifference.indexOf(Math.min.apply(null, ascentDifference.filter(Boolean))); // Stack overflow
+          // Source Code: https://stackoverflow.com/questions/10557176/minimum-number-excluding-zero
           similarLengthDetails = apiResponse.data.trails[indexLength];
           similarAscentDetails = apiResponse.data.trails[indexAscent];
           
