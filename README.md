@@ -85,7 +85,7 @@ Initial wireframes were drawn to understand the general flow of a user through t
 ### Route Files
 The requirements of this project included implementing all four CRUD (Create, Read, Update, Delete) routes. The way this CRUD routes were constructed were initiall determined by the wireframing and user experience:
 
-<img src="./planning/Routes.jpg" height = 300px width = 400px>
+<img src="./planning/Routes.jpg" height = 450px width = 450px>
 
 ### Site Experience
 The following are wireframe diagrams that best capture the initial thoughts for this web app. 
@@ -140,14 +140,14 @@ Another feature that this project employed was the async module and functionalit
 The initial algorithm to check for similar trails looks at two criteria of a trail:
 1. Length
 2. Elevation Gain
- 
+
 On the page showing details for a single hike, there are two additional recommended hikes which are the closest to the selected hike in terms of the two criteria. 
 
 This feature has additional potential to be developed into a more robust search and filter algorithm. 
 
 # Built with
 * HTML 
-* CSS (including Bootstrap)
+* CSS (including Bootstrap v4)
 * Javascript
 * Google Fonts
 * Node.js
@@ -169,7 +169,7 @@ This feature has additional potential to be developed into a more robust search 
 Thanks to Steve Peters, Carlo Bruno, Mike Shull, and many others in the SEI-SEA-25 cohort for their ideas and thoughts that were incorporated in this project
 
 # Additional Functionality and Wish List
-* Incorporating multi-page view so that it would show only 10 results per page with a link to scroll to the next set of 10. 
+* Incorporating pagination so that it would show only 10 results per page with a link to scroll to the next set of 10. 
 * Adding in actual reviews by pulling from the Yelp API.
 * Incorporating camping sites and fishing spots.
 * Linking a trip to suggest good food places nearby.
