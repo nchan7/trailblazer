@@ -77,7 +77,7 @@ router.get("/:number", function(req, res) {
             res.render('trail/show', { trail, trailDetails });
             }
          }).catch(function(error) {
-          console.log(error);
+          console.log("ERRORERROR:", error);
     
         })
         })
