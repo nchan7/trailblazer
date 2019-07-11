@@ -1,7 +1,7 @@
 # Trail Blazer
 ## Nathan Chan | July 9, 2019
 ### General Assembly - Software Engineering Immersive Project 2: HTML, CSS/Bootstrap, Javascript, Node.js, Express,js, Postgres, Sequelize
-#### Check out a demo of the site here: 
+#### Check out a demo of the site here: https://pure-reef-75179.herokuapp.com/
 
 # Introduction
 Looking for your next adventure? Here's where it begins! 
